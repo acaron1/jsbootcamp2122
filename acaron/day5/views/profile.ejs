@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <h1>Hewwo uwu</h1>
+  <h1>HOI</h1>
   <div id="content">
 
   </div>
@@ -17,55 +17,54 @@
 <script type="text/javascript">
   var characterData = <%- JSON.stringify(sendData) %>;
   if (characterData) {
-    //Find the existing "content" box and make is a js object
+    // Find the existing "content" box and make it a js object
     var contentBox = document.getElementById('content');
 
-    //Create a new box just for profile stats
-    let profileBox = document.createElement('div');
-    profileBox.id = "profileBox";
-    //Put it in the contentBox
-    contentBox.append(profileBox)
-
-    //Create an h2, put the character name in, put into contentBox
+    //create an h2, put character name in, put into contentBox
     let nameHeader = document.createElement('h2');
     nameHeader.innerText = characterData.name;
     contentBox.append(nameHeader);
 
-    //Put all stats into one header in the profileBox
+    //create a new box just for profile stats
+    let profileBox = document.createElement('div')
+    profileBox.id = "profileBox"
+    //put in contentBox
+    contentBox.append(profileBox)
+
+    //put all stats into one header in the profileBox
     let statsHeader = document.createElement('h3');
     statsHeader.innerText = 'Stats';
     let statsBox = document.createElement('div');
     statsBox.innerText = JSON.stringify(characterData.stats);
-    profileBox.append(statsHeader)
-    profileBox.append(statsBox)
+    content.append(statsHeader)
+    content.append(statsBox)
 
-
-    //Object.keys() returns a list of all property NAMES in a given object
-    // for..of will loop through each property NAME/key
+    //object.keys() returns a list of all properties in a given object
+    //for..of will loop through each property name/header
     for (var slot of Object.keys(characterData.equipment)) {
-      //Each equipment slot will have it's own header/box
+      //each equipment slot will have its own header/box
       let slotHeader = document.createElement('h3');
       slotHeader.innerHTML = slot;
-      //Insert data of the slot into a box
+      //insert data of the slot into a box
       let slotBox = document.createElement('div');
       slotBox.innerHTML = JSON.stringify(characterData.equipment[slot]);
-      //Add the equipment slot to the profileBox
+      //add equipment slot to the profileBox
       profileBox.append(slotHeader);
       profileBox.append(slotBox);
     }
 
   }
 </script>
-<!-- use accordion widget from jqueryui -->
+
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-<script>
-  $(function() {
-    $("#profileBox").accordion({
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#profileBox" ).accordion({
       collapsible: true
     });
-  });
-</script>
+  } );
+  </script>
 
 </html>
 
